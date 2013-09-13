@@ -20,7 +20,15 @@
 
 package org.openmrs.module.OT.db;
 
+import java.text.ParseException;
+import java.util.Date;
+import java.util.List;
+import org.openmrs.Concept;
+import org.openmrs.Encounter;
+import org.openmrs.Obs;
+import org.openmrs.Patient;
 import org.openmrs.module.OT.OperationTheatreService;
+import org.openmrs.module.hospitalcore.model.OpdTestOrder;
 
 /**
  *  Database methods for {@link OperationTheatreService}.
@@ -30,4 +38,35 @@ public interface OperationTheatreDAO {
 	/*
 	 * Add DAO methods here
 	 */
+	
+	/**
+	 * 
+	 * @param startDate
+	 * @param procedures
+	 * @param patients
+	 * @param page
+	 * @return List<OpdTestOrder>
+	 * @throws ParseException
+	 */
+	public List<OpdTestOrder> getSchedulesMinorOT(Date scheduleDate, List<Concept> procedures,
+			List<Patient> patients, int page) throws ParseException;
+	
+	/**
+	 * 
+	 * @param scheduleDate
+	 * @param procedures
+	 * @param patients
+	 * @return Integer
+	 * @throws ParseException
+	 */
+	public Integer countScheduleMinorOT(Date scheduleDate, List<Concept> procedures,
+			List<Patient> patients) throws ParseException;
+	
+	/**
+	 * 
+	 * @param encounterId
+	 * @param concept
+	 * @return Obs
+	 */
+	public Obs getDiagnosisOTProcedure(Encounter encounter, Concept concept);
 }

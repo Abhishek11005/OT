@@ -22,8 +22,6 @@
 </script>
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/moduleResources/hospitalcore/styles/paging.css" />
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/moduleResources/OT/styles/common.css" />
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/moduleResources/OT/scripts/jquery/include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css" />
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/moduleResources/OT/scripts/jquery/jquery.ui.timepicker.css" />
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/moduleResources/hospitalcore/styles/jquery.loadmask.css" />
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/moduleResources/hospitalcore/scripts/jquery/css/thickbox.css" />
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/moduleResources/hospitalcore/scripts/jquery/css/jquery.autocomplete.css" />
@@ -41,6 +39,3 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/moduleResources/hospitalcore/scripts/jquery/jquery.tablesorter.js"></script>
 <script type="text/javascript"  src="${pageContext.request.contextPath}/moduleResources/hospitalcore/scripts/common-utils.js" ></script>
 <script type="text/javascript"  src="${pageContext.request.contextPath}/moduleResources/hospitalcore/scripts/paging.js" ></script>
-<script type="text/javascript"  src="${pageContext.request.contextPath}/moduleResources/OT/scripts/jquery/include/jquery-1.9.0.min.js" ></script>
-<script type="text/javascript"  src="${pageContext.request.contextPath}/moduleResources/OT/scripts/jquery/include/ui-1.10.0/jquery.ui.position.min.js" ></script>
-<script type="text/javascript"  src="${pageContext.request.contextPath}/moduleResources/OT/scripts/jquery/jquery.ui.timepicker.js" ></script>

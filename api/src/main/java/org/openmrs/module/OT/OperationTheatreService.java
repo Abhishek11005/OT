@@ -20,7 +20,14 @@
 
 package org.openmrs.module.OT;
 
+import java.text.ParseException;
+import java.util.Date;
+import java.util.List;
+import org.openmrs.Concept;
+import org.openmrs.Encounter;
+import org.openmrs.Obs;
 import org.openmrs.api.OpenmrsService;
+import org.openmrs.module.hospitalcore.model.OpdTestOrder;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -40,4 +47,44 @@ public interface OperationTheatreService extends OpenmrsService {
 	 * Add service methods here
 	 * 
 	 */
+	
+	/**
+	 * Return all minor OT procedures concepts
+	 * 
+	 * @return List<Concept>
+	 **/
+	public List<Concept> getProceduresMinorOT();
+	
+	/**
+	 * Find minorOT schedules
+	 * 
+	 * @param startDate
+	 * @param phrase
+	 * @param procedures
+	 * @param page
+	 * @return List<OpdTestOrder> 
+	 * @throws ParseException
+	 */
+	public List<OpdTestOrder> getSchedulesMinorOT(Date startDate, String phrase,
+			List<Concept> procedures, int page) throws ParseException;
+	
+	/**
+	 * Count Minor OT schedules
+	 * 
+	 * @param startDate
+	 * @param phrase
+	 * @param procedures
+	 * @return Integer
+	 * @throws ParseException
+	 */
+	public Integer countScheduleMinorOT(Date startDate, String phrase, 
+			List<Concept> procedures) throws ParseException;
+
+	/**
+	 * Returns a diagnosis related to OT procedure
+	 * 
+	 * @param encounterId
+	 * @return String
+	 */
+	public Obs getDiagnosisOTProcedure(Encounter encounterId);
 }

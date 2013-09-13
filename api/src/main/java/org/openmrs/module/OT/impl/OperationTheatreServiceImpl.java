@@ -20,11 +20,24 @@
 
 package org.openmrs.module.OT.impl;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.Concept;
+import org.openmrs.ConceptAnswer;
+import org.openmrs.Encounter;
+import org.openmrs.Obs;
+import org.openmrs.Patient;
+import org.openmrs.api.context.Context;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.OT.OperationTheatreService;
 import org.openmrs.module.OT.db.OperationTheatreDAO;
+import org.openmrs.module.OT.util.OTConstants;
+import org.openmrs.module.hospitalcore.model.OpdTestOrder;
 
 /**
  * It is a default implementation of {@link OperationTheatreService}.
@@ -32,6 +45,9 @@ import org.openmrs.module.OT.db.OperationTheatreDAO;
 public class OperationTheatreServiceImpl extends BaseOpenmrsService implements OperationTheatreService {
 	
 	protected final Log log = LogFactory.getLog(this.getClass());
+	
+	public OperationTheatreServiceImpl() {
+	}
 	
 	private OperationTheatreDAO dao;
 	
@@ -48,4 +64,44 @@ public class OperationTheatreServiceImpl extends BaseOpenmrsService implements O
     public OperationTheatreDAO getDao() {
 	    return dao;
     }
+	
+	public List<Concept> getProceduresMinorOT() {
+		Concept concept = Context.getConceptService().getConcept(OTConstants.CONCEPT_CLASS_NAME_MINOR_OT);
+		
+		Collection<ConceptAnswer> allMinorOTProcedures = null;
+		List<Concept> id = new ArrayList<Concept>();
+		if( concept != null )
+		{
+			allMinorOTProcedures = concept.getAnswers();
+			for (ConceptAnswer c: allMinorOTProcedures){
+				id.add(c.getAnswerConcept());
+			}
+			return id;
+		}
+		return null;
+	}
+
+	public List<OpdTestOrder> getSchedulesMinorOT(Date startDate, String phrase,
+			List<Concept> procedures, int page) throws ParseException {
+		
+		List<Patient> patients = Context.getPatientService()
+				.getPatients(phrase);
+		List<OpdTestOrder> schedules = dao.getSchedulesMinorOT(startDate, 
+				procedures, patients, page);
+		return schedules;
+	}
+	
+	public Integer countScheduleMinorOT(Date startDate, String phrase, 
+			List<Concept> procedures) throws ParseException {
+		
+		List<Patient> patients = Context.getPatientService()
+				.getPatients(phrase);
+		return dao.countScheduleMinorOT(startDate, procedures, patients);
+	}
+
+	public Obs getDiagnosisOTProcedure(Encounter encounter) {
+		Concept concept = Context.getConceptService()
+				.getConcept(OTConstants.CONCEPT_CLASS_NAME_DIAGNOSIS);
+		return dao.getDiagnosisOTProcedure(encounter, concept);
+	}
 }
