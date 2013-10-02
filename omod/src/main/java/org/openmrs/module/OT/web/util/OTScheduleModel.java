@@ -33,6 +33,7 @@ public class OTScheduleModel implements Comparator<OTScheduleModel>, Comparable<
 	private String procedure;
 	private Integer encounterId;
 	private Integer orderId;
+	private String status;
 	
 	public String getStartDate() {
 		return startDate;
@@ -113,6 +114,14 @@ public class OTScheduleModel implements Comparator<OTScheduleModel>, Comparable<
 
 	public int compare(OTScheduleModel o1, OTScheduleModel o2) {
 		return 0;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 

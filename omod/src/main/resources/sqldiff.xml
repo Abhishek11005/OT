@@ -13,14 +13,14 @@
 			   calling this script
 	</help>
 
-<!-- 
+
 	<diff>
 		<version>1.0.0</version>
-		<author>Ghanshyam</author>
-		<date></date>
-		<description></description>
+		<author>Abhishek-Ankur</author>
+		<date>Sep 14th 2013</date>
+		<description>Create a OT procedure table</description>
 		<sql></sql>
 	</diff>
- -->
+
 	
 </sqldiff>

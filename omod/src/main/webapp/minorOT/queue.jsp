@@ -42,7 +42,7 @@
 			data : ({
 				date			: date,
 				phrase			: phrase,
-				//procedure		: procedure,
+				procedure		: procedure,
 				currentPage		: currentPage
 			}),
 			success : function(data) {
@@ -91,7 +91,7 @@
 	<input type="button" value="Reset" onClick="reset();"/>
 </div>
 
-<div id="Procedures">
+<div id="otProcedures">
 </div>
 
 <%@ include file="/WEB-INF/template/footer.jsp"%>

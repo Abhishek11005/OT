@@ -22,6 +22,7 @@ package org.openmrs.module.OT.web.controller.minorOT.queue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -46,13 +47,32 @@ public class SearchProcedureController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String searchTest(
 			@RequestParam(value = "date", required = false) String dateStr,
-			@RequestParam(value = "phrase", required = false) String phrase,		
+			@RequestParam(value = "phrase", required = false) String phrase,
+			@RequestParam(value = "procedure", required = false) Integer procedureId,
 			@RequestParam(value = "currentPage", required = false) Integer currentPage,
 			HttpServletRequest request, Model model) {
 	
 		OperationTheatreService ots = (OperationTheatreService) Context
 				.getService(OperationTheatreService.class);
-		List<Concept> procedures = ots.getProceduresMinorOT();
+		
+		List<Concept> procedures = new ArrayList<Concept>();
+		Concept procedure = Context.getConceptService().getConcept(procedureId);
+		if (procedure != null) {
+			if (procedures.isEmpty())
+				procedures.add(procedure);
+			else {
+				procedures.clear();
+				procedures.add(procedure);
+			}
+		}
+		else {
+			if (procedures.isEmpty())
+				procedures = ots.getProceduresMinorOT();
+			else {
+				procedures.clear();
+				procedures = ots.getProceduresMinorOT();
+			}
+		}
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = null;
@@ -64,16 +84,16 @@ public class SearchProcedureController {
 					currentPage);
 			List<OTScheduleModel> otProcedures = OperationTheatreUtil.generateModelsFromSchedules(
 					schedules);
+
 			int total = ots.countScheduleMinorOT(date, phrase, procedures);
 			PagingUtil pagingUtil = new PagingUtil(OTConstants.PAGESIZE, currentPage,
 					total);
 			model.addAttribute("pagingUtil", pagingUtil);
 			model.addAttribute("otProcedures", otProcedures);
 			model.addAttribute("otProcedureNo", otProcedures.size());
-			System.out.println("Reached Here yey I am in searchprocedurecontroller.java");
 		} catch (ParseException e) {
 			e.printStackTrace();
-			System.out.println("Error when parsing order date!");
+			System.out.println("Error when parsing schedule date!");
 			return null;
 		}
 		return "/module/OT/minorOT/search";

@@ -39,7 +39,7 @@ otProcedureNo = ${otProcedureNo};
 	<tbody>
 		<c:forEach var="otProcedure" items="${otProcedures}" varStatus="index">
 			<c:choose>
-				<c:when otProcedure="${index.count mod 2 == 0}">
+				<c:when test="${index.count mod 2 == 0}">
 					<c:set var="klass" value="odd"/>
 				</c:when>					
 				<c:otherwise>
@@ -48,7 +48,7 @@ otProcedureNo = ${otProcedureNo};
 			</c:choose>
 			<tr class="${klass}">
 			<c:choose>
-				<c:when otProcedure="${pagingUtil.currentPage != 1}" >
+				<c:when test="${pagingUtil.currentPage != 1}" >
 				<td>${index.count + (pagingUtil.currentPage-1)*pagingUtil.pageSize} </td>
 				</c:when>
 				<c:otherwise>
@@ -78,7 +78,7 @@ otProcedureNo = ${otProcedureNo};
 				</td>
 				<td id="acceptBox_${otProcedure.orderId}">					
 					<c:choose>
-						<c:when otProcedure="${empty otProcedure.status}">
+						<c:when test="${empty otProcedure.status}">
 							<a href='javascript:getDefaultSampleId(${otProcedure.orderId});'>
 								Accept 
 							</a>
@@ -90,10 +90,10 @@ otProcedureNo = ${otProcedureNo};
 				</td>
 				<td id="rescheduleBox_${otProcedure.orderId}">
 					<c:choose>
-						<c:when otProcedure="${empty otProcedure.status}">
+						<c:when test="${empty otProcedure.status}">
 							<a href="rescheduleProcedure.form?orderId=${otProcedure.orderId}&modal=true&height=200&width=800" class="thickbox" title="Reschedule Procedure">Reschedule</a>
 						</c:when>
-						<c:when otProcedure="${otProcedure.status eq 'accepted'}">
+						<c:when test="${otProcedure.status eq 'accepted'}">
 							Reschedule					
 						</c:when>
 					</c:choose> 					
